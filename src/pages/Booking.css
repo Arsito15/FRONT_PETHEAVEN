@@ -1,0 +1,191 @@
+.booking-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative; /* Para poder posicionar el formulario de pago a la derecha */
+}
+
+.reservation-details {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+/* Contenedor para la información general */
+.general-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.room-info, .pet-info, .services-info {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.room-info:last-child, .pet-info:last-child {
+  margin-right: 0;
+}
+
+.room-details, .pet-details {
+  display: flex;
+  align-items: center;
+}
+
+.room-text, .pet-text {
+  margin-left: 15px;
+}
+
+/* Especificaciones para las imágenes */
+img.room-img, img.pet-img {
+  width: 150px; /* Tamaño específico para ajustar mejor el espacio */
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Servicios */
+.services-info {
+  margin-bottom: 20px;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #fff;
+  padding: 8px; /* Reducir padding para ajustar tamaño */
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.service-text {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Total */
+.total-info {
+  background-color: #eaf5ea;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+/* Estilo para el formulario de selección de fecha */
+.date-selection {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.date-selection .form-group {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.date-selection .form-group:last-child {
+  margin-right: 0;
+}
+
+.date-selection label {
+  color: #000; /* Cambiar color a negro */
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+textarea.form-control {
+  height: 100px; /* Ajustar la altura del textarea */
+}
+
+/* Botón de reserva */
+.btn {
+  background-color: #ff9933;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background-color: #e68a00;
+}
+
+.message {
+  font-size: 14px;
+  color: green;
+  margin-top: 10px;
+}
+
+/* Estilo para el formulario de pago a la derecha */
+.payment-section {
+  position: absolute;
+  top: 20px;
+  right: -400px; /* Posiciónalo fuera del contenedor principal */
+  background-color: #fff;
+  padding: 20px;
+  width: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.payment-section h4 {
+  margin-bottom: 20px;
+}
+
+/* Estilo para la notificación de éxito */
+.success-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 9999; /* Asegurarse de que esté sobre otros elementos */
+}
+
+.success-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+/* Transiciones */
+.payment-section,
+.success-notification {
+  transition: all 0.3s ease-in-out;
+}

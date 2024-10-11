@@ -5,7 +5,13 @@ import "./css/animate.css";
 import "./css/animate.min.css";
 import "./App.css";
 import Header from "./components/common/Header";
+import Footer from "./components/common/Footer";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { AuthProvider } from "./AuthContext";  // Proveedor de autenticación
+import { CartProvider } from "./pages/CartContext"; // Proveedor del carrito
+import ProtectedRoute from "./ProtectedRoute";  // Componente para proteger las rutas
+
+// Páginas principales
 import {
   Home,
   Booking,
@@ -16,32 +22,60 @@ import {
   Services,
   Team,
   Testimonial,
+  ReservasActivas,
+  UserForm,
+  MascotaForm,
 } from "./pages/index";
-import Footer from "./components/common/Footer";
-import RoomDetails from "./components/RoomDetails"; // Nueva importación del componente de detalles
+import RoomDetails from "./components/RoomDetails";  // Detalles de habitación
+import Login from "./login";  // Componente Login
 
 export default function App() {
   return (
-    <>
-      <div>
-        <Router>
-          <Header />
+    <Router>
+      <AuthProvider>
+        <CartProvider> {/* Aseguramos que CartProvider envuelva la aplicación */}
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/testimonial" element={<Testimonial />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/rooms" element={<Room />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/room/:id" element={<RoomDetails />} />
-            
-            <Route path="/*" element={<PageNotFound />} />
+            {/* Ruta para el login que no necesita protección */}
+            <Route path="/login" element={<Login />} />
+
+            {/* Ruta protegida: envuelve el resto del contenido */}
+            <Route
+              path="/*"
+              element={
+                <ProtectedRoute>
+                  {/* Envolver el contenido con Header y Footer */}
+                  <div className="app-container">
+                    <Header />
+                    <div className="content-container">
+                      {/* Contenedor principal de las rutas */}
+                      <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/booking" element={<Booking />} />
+                        <Route path="/ReservasActivas" element={<ReservasActivas />} />
+                        <Route path="/team" element={<Team />} />
+                        <Route path="/testimonial" element={<Testimonial />} />
+                        <Route path="/rooms" element={<Room />} />
+                        <Route path="/services" element={<Services />} />
+                        <Route path="/room/:id" element={<RoomDetails />} />
+                        <Route path="/UserForm" element={<UserForm />} />
+                        <Route path="/MascotaForm" element={<MascotaForm />} />
+
+                        {/* Rutas públicas (si las necesitas) */}
+                        <Route path="/about" element={<AboutUs />} />
+                        <Route path="/contact" element={<Contact />} />
+
+                        {/* Ruta de página no encontrada */}
+                        <Route path="/*" element={<PageNotFound />} />
+                      </Routes>
+                    </div>
+                    <Footer />
+                  </div>
+                </ProtectedRoute>
+              }
+            />
           </Routes>
-          <Footer />
-        </Router>
-      </div>
-    </>
+        </CartProvider>
+      </AuthProvider>
+    </Router>
   );
 }

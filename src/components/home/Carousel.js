@@ -3,9 +3,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { carouselData } from "../data/Data";
+import { useNavigate } from "react-router-dom";  // Importamos el hook de navegación
 
 export default function Carousel() {
   const sliderRef = useRef(null);
+  const navigate = useNavigate();  // Inicializamos el hook de navegación
 
   const next = () => {
     if (sliderRef.current) {
@@ -26,6 +28,7 @@ export default function Carousel() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
   return (
     <>
       <div className="container-fluid p-0 mb-5">
@@ -47,18 +50,18 @@ export default function Carousel() {
                       <h1 className="display-3 text-white mb-4 animated slideInDown">
                         {val.title}
                       </h1>
-                      <a
-                        href=""
+                      <button
+                        onClick={() => navigate('/Rooms')}  // Redirige a la página de habitaciones
                         className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft"
                       >
                         {val.btn1}
-                      </a>
-                      <a
-                        href=""
+                      </button>
+                      <button
+                        onClick={() => navigate('/Booking')}  // Redirige a la página de reservas activas
                         className="btn btn-light py-md-3 px-md-5 animated slideInRight"
                       >
                         {val.btn2}
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>

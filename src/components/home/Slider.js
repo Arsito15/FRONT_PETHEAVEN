@@ -29,11 +29,13 @@ export default function Sliders() {
                 >
                   <p>{item.description}</p>
                   <div className="d-flex align-items-center">
-                    <img
-                      className="img-fluid flex-shrink-0 rounded"
-                      src={item.img}
-                      style={{ width: "45px", height: "45px" }}
-                    />
+                  <img
+                          className="img-fluid flex-shrink-0 rounded"
+                          src={item.img}
+                          alt=""  // Alt vacío si es decorativa
+                          style={{ width: "45px", height: "45px" }}
+                        />
+
                     <div className="ps-3">
                       <h6 className="fw-bold mb-1">{item.name}</h6>
                       <small>{item.profession}</small>

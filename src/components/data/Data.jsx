@@ -30,6 +30,11 @@ export const navList = [
         text: "Agendar",
       },
       {
+        id: 54,
+        path: "/ReservasActivas",
+        text: "Reservas activas",
+      },
+      {
         id: 52,
         path: "/team",
         text: "Nuestro equipo",
@@ -39,6 +44,7 @@ export const navList = [
         path: "/testimonial",
         text: "Testimonios",
       },
+
     ],
   },
   {

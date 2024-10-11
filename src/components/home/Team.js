@@ -1,6 +1,5 @@
 import React from "react";
 import { socialIcons, team } from "../data/Data";
-import { Link } from "react-router-dom";
 import CommonHeading from "../common/CommonHeading";
 
 export default function Teams() {
@@ -26,12 +25,12 @@ export default function Teams() {
                     <div className="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
                       {socialIcons.slice(0, 3).map((val, index) => (
                         <a
-                          className="btn btn-square btn-primary mx-1"
-                          href=""
-                          key={index}
-                        >
-                          {val.icon}
-                        </a>
+                            className="btn btn-square btn-primary mx-1"
+                            href="https://ejemplo.com"
+                            key={index}
+                          >
+                            {val.icon}
+                          </a>
                       ))}
                     </div>
                   </div>

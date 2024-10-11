@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { navList } from "../data/Data";
 import SocialIcons from "./SocialIcons";
+import { useAuth } from "../../AuthContext";  // Importa el contexto de autenticación
 
 export default function Header() {
   const [navbarCollapse, setNavbarCollapse] = useState(false);
-
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const { userData, logout } = useAuth();  // Extraemos los datos del usuario y la función de logout del contexto
+
+  // Verificación de URL del avatar: externa o local
+  const avatarUrl = userData?.AVATAR_URL?.startsWith('http')
+    ? userData.AVATAR_URL  // URL externa (Google, etc.)
+    : `http://localhost:3000${userData?.AVATAR_URL}`;  // URL local, añadir el host
 
   const handleMouseEnter = (itemId) => {
     setActiveDropdown(itemId);
@@ -14,6 +21,14 @@ export default function Header() {
 
   const handleMouseLeave = () => {
     setActiveDropdown(null);
+  };
+
+  const handleUserMouseEnter = () => {
+    setShowUserDropdown(true);
+  };
+
+  const handleUserMouseLeave = () => {
+    setShowUserDropdown(false);
   };
 
   return (
@@ -65,7 +80,7 @@ export default function Header() {
                             }`}
                           >
                             {item.subItems.map((sub) => (
-                              <Link to={sub.path} className="dropdown-item">
+                              <Link to={sub.path} className="dropdown-item" key={sub.id}>
                                 {sub.text}
                               </Link>
                             ))}
@@ -79,6 +94,44 @@ export default function Header() {
                     </div>
                   ))}
                 </div>
+
+                {/* Sección de usuario */}
+                <div
+                  className="nav-item dropdown"
+                  onMouseEnter={handleUserMouseEnter}
+                  onMouseLeave={handleUserMouseLeave}
+                >
+                  {/* Mostrar el avatar del usuario si existe, de lo contrario una imagen por defecto */}
+                  <img
+                    src={avatarUrl || "https://cdn-icons-png.flaticon.com/512/3135/3135768.png"}  // Usar avatarUrl calculado
+                    alt="User Avatar"
+                    className="rounded-circle"
+                    style={{ width: "40px", height: "40px", cursor: "pointer", marginRight: "10px" }}
+                  />
+                  <span className="text-white">{userData?.NOMBRE_USUARIO || "Usuario"}</span>
+                  <div
+                    className={`dropdown-menu dropdown-menu-end ${
+                      showUserDropdown ? "show" : ""
+                    }`}
+                    style={{
+                      backgroundColor: "#f8f9fa",
+                      border: "1px solid #ddd",
+                      padding: "10px",
+                      borderRadius: "5px"
+                    }}
+                  >
+                    <Link to="/UserForm" className="dropdown-item">
+                      Configuración de perfil
+                    </Link>
+                    <Link to="/MascotaForm" className="dropdown-item">
+                      Tus Mascotas
+                    </Link>
+                    <button className="dropdown-item" onClick={logout}>
+                      Cerrar sesión
+                    </button>
+                  </div>
+                </div>
+
                 <SocialIcons />
               </div>
             </nav>
