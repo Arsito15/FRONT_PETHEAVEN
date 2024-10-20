@@ -1,0 +1,47 @@
+/* Asegurar que el contenedor principal ocupe toda la altura */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;  /* Asegura que la app ocupe toda la altura de la ventana */
+  }
+  
+  .content-container {
+    flex: 1;  /* El contenido principal se expande para ocupar el espacio restante */
+    padding: 20px;  /* Asegura espacio alrededor del contenido */
+  }
+  
+  .footer {
+    margin-top: auto;  /* El footer siempre se mantendrá en la parte inferior */
+  }
+  
+  /* Otros estilos necesarios para tu app */
+  .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link.active {
+    color : #EC268C;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link {
+    margin-right: 30px;
+    padding: 25px 0;
+    color: #FFFFFF;
+    font-size: 15px;
+    text-transform: uppercase;
+    outline: none;
+  }
+  
+  .carousel-caption {
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .bg-image {
+    background-image: url('../public/assets/img/dogos1.jpg');
+  }
+  

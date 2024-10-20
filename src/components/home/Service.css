@@ -1,0 +1,127 @@
+/* Contenedor del servicio */
+.service-item {
+    background-color: #f8f9fa;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Movimiento suave al hacer hover */
+.service-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}
+
+/* Estilos del icono */
+.service-icon {
+    background-color: transparent; /* Eliminar cuadro detrás del icono */
+    padding: 10px;
+    border: none;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo de los iconos personalizados */
+.service-icon img {
+    width: 80px; /* Ajusta el tamaño de los iconos */
+    height: 80px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto de agrandado en el icono cuando se pasa el mouse */
+.service-item:hover .service-icon img {
+    transform: scale(1.1);
+}
+
+/* Título del servicio */
+.service-item h5 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+/* Descripción del servicio */
+.service-item p.text-body {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+/* Precio del servicio */
+.service-item .service-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff9900; /* Color del precio */
+    margin-bottom: 10px;
+}
+
+/* Duración del servicio */
+.service-item .service-duration {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+/* Cambio de color del texto al hacer hover */
+.service-item:hover h5,
+.service-item:hover p.text-body {
+    color: #007bff;
+}
+
+/* Estilos del grupo de servicios */
+.service-group h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Línea decorativa debajo del título */
+.service-group h3::after {
+    content: '';
+    width: 50px;
+    height: 3px;
+    background-color: #ff9900;
+    display: block;
+    margin: 8px auto 0;
+}
+
+/* Cambio de color al hacer hover */
+.service-item:hover {
+    background-color: #e0f9e0; /* Cambiar el color de fondo a verde al hacer hover */
+}
+
+/* Servicio seleccionado */
+.service-item.selected {
+    background-color: #6f42c1; /* Color morado para el servicio seleccionado */
+    color: white;
+}
+
+/* Cambiar los colores de texto e iconos del servicio seleccionado */
+.service-item.selected h5,
+.service-item.selected p.text-body,
+.service-item.selected .service-price,
+.service-item.selected .service-duration {
+    color: white;
+}
+
+.service-item.selected .service-icon img {
+    filter: brightness(0) invert(1); /* Cambia el color del icono a blanco al estar seleccionado */
+}

@@ -1,0 +1,28 @@
+.footer {
+    padding-top: 10px;  /* Reducimos padding superior */
+    padding-bottom: 10px;  /* Reducimos padding inferior */
+  }
+  
+  .footer h1, .footer h6 {
+    margin-bottom: 10px;  /* Reducimos márgenes inferiores */
+    font-size: 1rem;  /* Ajustamos tamaño del texto */
+  }
+  
+  .footer p, .footer a {
+    margin-bottom: 5px;  /* Reducimos márgenes de los párrafos y enlaces */
+    font-size: 0.9rem;  /* Ajustamos tamaño del texto */
+  }
+  
+  .footer .btn-social {
+    margin-right: 10px;  /* Mantenemos separación entre íconos sociales */
+  }
+  
+  .bg-dark {
+    padding-top: 5px;  /* Reducimos padding superior */
+    padding-bottom: 5px;  /* Reducimos padding inferior */
+  }
+  
+  .container-fluid {
+    max-width: 100%;
+  }
+  

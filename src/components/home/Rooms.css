@@ -1,0 +1,349 @@
+/* Contenedor de la tarjeta de la habitación */
+.room-item {
+  background-color: #f8f9fa;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Ajuste de la imagen para que sea uniforme */
+.room-img {
+  width: 100%;
+  height: 200px; 
+  object-fit: cover; 
+  transition: transform 0.3s ease;
+  border-radius: 8px 8px 0 0; 
+}
+
+/* Efecto de movimiento al pasar el mouse */
+.room-item:hover .room-img {
+  transform: scale(1.05); 
+}
+
+/* Cambio de color de fondo para habitaciones disponibles */
+.room-item.available {
+  background-color: #e0f9e0; 
+}
+
+/* Cambio de color de fondo para habitaciones no disponibles */
+.room-item.not-available {
+  background-color: #f9e0e0; 
+}
+
+/* Efecto de sombra y movimiento cuando se pasa el mouse por encima */
+.room-item:hover {
+  transform: translateY(-10px); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+/* Botones */
+.room-item .btn-primary {
+  background-color: #ff9900;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.room-item .btn-primary:hover {
+  background-color: #cc7a00;
+}
+
+.room-item .btn-dark {
+  background-color: #343a40;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.room-item .btn-dark:hover {
+  background-color: #1d1f21;
+}
+
+/* Ajustes para el texto y su alineación */
+.room-item h5 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.room-item p {
+  font-size: 14px;
+  color: #666;
+}
+
+.room-item small {
+  font-size: 12px;
+  color: #777;
+}
+
+/* Ajustes de los pequeños indicadores (capacidad, camas, baños) */
+.room-item .border-end {
+  border-right: 1px solid #ddd;
+}
+
+/* Pequeña etiqueta con el precio */
+.room-item small.position-absolute {
+  font-size: 14px;
+  padding: 6px 12px;
+  background-color: #ff9900;
+  border-radius: 12px;
+}
+
+/* Carrito de compras más angosto */
+.cart-container {
+  width: 100%;
+  max-width: 250px; /* Reducido para pantallas pequeñas */
+  transition: all 0.3s ease;
+}
+
+.cart-container:hover {
+  max-width: 100%; /* Expandir carrito al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para las imágenes en el carrito */
+.cart-room-img, .cart-pet-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* Información adicional que se muestra al pasar el mouse */
+.cart-item-info, .cart-pet-info {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Mostrar información al pasar el mouse */
+.cart-container:hover .cart-item-info,
+.cart-container:hover .cart-pet-info {
+  display: block;
+  opacity: 1;
+}
+
+/* Estilos del modal para pantalla completa */
+.modal-content {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background-color: #f8f9fa;
+}
+
+/* Encabezado del modal */
+.modal-header {
+  background-color: #ff9900;
+  border-bottom: none;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+/* Cuerpo del modal */
+.modal-body {
+  padding: 30px;
+  background-color: #fff;
+}
+
+/* Imagen del modal */
+.modal-body img {
+  width: 100%;
+  height: 300px; 
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título dentro del modal */
+.modal-body h5 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Descripción */
+.modal-body p {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.6;
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Lista de detalles */
+.modal-body ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-body ul li {
+  font-size: 16px;
+  color: #666;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-body ul li span {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Precio destacado */
+.modal-body ul li.price {
+  font-size: 24px;
+  color: #ff9900;
+  font-weight: bold;
+  margin: 20px 0;
+  text-align: center;
+}
+
+/* Botones del modal */
+.modal-footer {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.modal-footer .btn-primary {
+  background-color: #ff9900;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #cc7a00;
+}
+
+/* Adaptación del modal a pantallas pequeñas */
+@media (max-width: 768px) {
+.modal-content {
+  width: 90%;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  padding: 15px;
+}
+
+.modal-body h5 {
+  font-size: 18px;
+}
+
+.modal-body ul li {
+  font-size: 14px;
+}
+
+.modal-body ul li.price {
+  font-size: 20px;
+}
+}
+
+/* Estilos para ajustar el select de las mascotas */
+.mascotas__horizontal-container {
+  display: flex;
+  justify-content: center; /* Para centrar las tarjetas de mascotas */
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px 0;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.mascota__card-horizontal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  min-width: 150px;
+  border: 2px solid transparent;
+}
+
+.mascota__card-horizontal.selected {
+  border-color: #6a0dad; /* Color morado cuando está seleccionada */
+}
+
+.mascota__card-horizontal:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mascota__card-img-horizontal {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.mascota__card-info-horizontal {
+  text-align: center;
+}
+
+.mascota__card-info-horizontal h5 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.mascota__card-info-horizontal p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Si no hay mascotas */
+.no-mascotas {
+text-align: center;
+margin-top: 20px;
+}
+
+.no-mascotas p {
+font-size: 16px;
+color: #666;
+}
+
+.no-mascotas .btn {
+background-color: #007bff;
+color: white;
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+transition: background-color 0.3s ease;
+}
+
+.no-mascotas .btn:hover {
+background-color: #0056b3;
+}
