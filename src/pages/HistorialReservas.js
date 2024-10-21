@@ -18,7 +18,7 @@ const getPetImageUrl = (imagePath) => {
   return avatarUrl.startsWith('http') ? avatarUrl : `http://localhost:3000${avatarUrl}`;
 };
 
-export default function ReservasActivas() {
+export default function HistorialReservas() {
   const { userData } = useAuth();  
   const [reservasAgrupadas, setReservasAgrupadas] = useState({});
   const [error, setError] = useState("");
@@ -26,10 +26,10 @@ export default function ReservasActivas() {
   useEffect(() => {
     if (!userData) return;
 
-    // Función para obtener las reservas activas y agruparlas por ID de reservación
-    const obtenerReservasActivas = async () => {
+    // Función para obtener el historial de reservas y agruparlas por ID de reservación
+    const obtenerHistorialReservas = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/reservaciones/usuario/${userData.USUARIO_ID}`);
+        const response = await axios.get(`http://localhost:3000/api/reservaciones/historial/${userData.USUARIO_ID}`);
         const reservas = response.data;
 
         // Agrupar las reservas por `RESERVACION_ID`
@@ -52,12 +52,12 @@ export default function ReservasActivas() {
 
         setReservasAgrupadas(reservasPorID);
       } catch (error) {
-        setError("Error al obtener las reservas activas.");
+        setError("Error al obtener el historial de reservas.");
         console.error(error);
       }
     };
 
-    obtenerReservasActivas();
+    obtenerHistorialReservas();
   }, [userData]);
 
   // Función para formatear las fechas
@@ -74,12 +74,12 @@ export default function ReservasActivas() {
 
   return (
     <>
-      <Heading heading="Reservas Activas" title="Home" subtitle="Reservas Activas" />
+      <Heading heading="Historial de Reservas" title="Home" subtitle="Historial de Reservas" />
       <div className="reservas-activas-container">
-        <h1>Reservas Activas</h1>
+        <h1>Historial de Reservas</h1>
         {error && <p className="error-message">{error}</p>}
         {Object.keys(reservasAgrupadas).length === 0 ? (
-          <p>No hay reservas activas en este momento.</p>
+          <p>No hay reservas finalizadas en este momento.</p>
         ) : (
           Object.values(reservasAgrupadas).map((reservaAgrupada, index) => {
             const reserva = reservaAgrupada.info;
