@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { footerContact, footerItem, socialIcons } from "../data/Data";
+import { footerContact, footerItem } from "../data/Data"; // Eliminamos socialIcons
 
 export default function Footer() {
   return (
@@ -32,13 +32,6 @@ export default function Footer() {
                   {val.icon} {val.name}
                 </p>
               ))}
-              <div className="d-flex pt-2">
-                {socialIcons.slice(0, 4).map((val, index) => (
-                  <a className="btn btn-outline-light btn-social" href="" key={index}>
-                    {val.icon}
-                  </a>
-                ))}
-              </div>
             </div>
 
             {/* Sección de Enlaces Rápidos */}
@@ -50,9 +43,9 @@ export default function Footer() {
                       {section.header}
                     </h6>
                     {section.UnitItem.map((item, itemIndex) => (
-                      <a className="btn btn-link" href="" key={itemIndex}>
+                      <button className="btn btn-link" key={itemIndex}> {/* Usar botón en lugar de enlace */}
                         {item.name}
-                      </a>
+                      </button>
                     ))}
                   </div>
                 ))}
@@ -65,7 +58,9 @@ export default function Footer() {
       {/* Espacio adicional */}
       <div className="container-fluid bg-dark">
         <div className="container py-1">
-          <p className="text-center text-white mb-0">© 2024 PetHeaven. Todos los derechos reservados.</p>
+          <p className="text-center text-white mb-0">
+            © 2024 PetHeaven. Todos los derechos reservados.
+          </p>
         </div>
       </div>
     </>

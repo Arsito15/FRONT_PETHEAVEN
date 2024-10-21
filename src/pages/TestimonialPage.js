@@ -5,7 +5,7 @@ import Sliders from "../components/home/Slider";
 export default function Testimonial() {
   return (
     <>
-      <Heading heading="Testimonial" title="Home" subtitle="Testimonial" />
+      <Heading heading="Testimonios" title="PETHEAVEN" />
       <Sliders />
     </>
   );

@@ -6,7 +6,7 @@ import Sliders from "../components/home/Slider";
 export default function Service() {
   return (
     <>
-      <Heading heading="Services" title="Home" subtitle="Services" />
+      <Heading heading="Servicios" title="PETHEAVEN"/>
       <Services />
       <Sliders />
     </>

@@ -6,7 +6,7 @@ import Team from "../components/home/Team";
 export default function AboutUs() {
   return (
     <>
-      <Heading heading="About" title="Home" subtitle="About" />
+      <Heading heading="Acerca de nosotros" title="PETHEAVEN"/>
       <About />
       <Team />
     </>

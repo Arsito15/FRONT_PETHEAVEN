@@ -5,7 +5,7 @@ import Rooms from "../components/home/Rooms";
 export default function Room() {
   return (
     <>
-      <Heading heading="Room" title="Home" subtitle="Room" />
+      <Heading heading="Habitaciones" title="PETHEAVEN"/>
       <Rooms />
     </>
   );

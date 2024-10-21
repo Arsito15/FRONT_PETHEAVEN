@@ -1,16 +1,48 @@
 /* Estilo futurista para el formulario de login */
 
-.login-container {
+.login-page {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   min-height: 100vh;
-  background-color: #1c1c1e; /* Fondo oscuro */
-  color: #ffffff; /* Texto blanco */
+  background-image: linear-gradient(
+    to right, 
+    #000000 20%,       /* Negro cubre el 20% del ancho */
+    #001f3f 80%        /* Azul marino oscuro aparece gradualmente hasta el 80% */
+  );
+  padding: 0 20px;
 }
 
-.login-container h1 {
+
+
+
+.login-container {
+  flex: 1;
+  max-width: 500px; /* Definir un ancho fijo para el recuadro del formulario */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+  margin-left: 300px; /* Desplazar el recuadro del formulario desde el costado izquierdo */
+}
+
+.login-form {
+  width: 100%;
+}
+
+.login-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.login-logo img {
+  max-width: 900px; /* Aumentar el tamaño del logo */
+  height: auto;
+}
+
+.login-form h1 {
   font-size: 2.5rem;
   color: #ec9926; /* Color principal */
   margin-bottom: 2rem;
@@ -18,12 +50,7 @@
 }
 
 form {
-  background-color: #ffffff; /* Fondo del formulario */
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Efecto de sombra */
   width: 100%;
-  max-width: 400px;
 }
 
 .form-group {
@@ -43,7 +70,6 @@ form {
   border: none;
   border-radius: 5px;
   background-color: #fef8f8; /* Fondo de los inputs */
-  color: #ffffff;
   font-size: 1rem;
 }
 
@@ -73,7 +99,6 @@ form {
   font-size: 0.9rem;
   text-align: center;
 }
-
 
 .buttons-container {
   display: flex;

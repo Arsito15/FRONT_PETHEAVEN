@@ -5,7 +5,6 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
-  position: relative; /* Para poder posicionar el formulario de pago a la derecha */
 }
 
 .reservation-details {
@@ -147,16 +146,14 @@ textarea.form-control {
   margin-top: 10px;
 }
 
-/* Estilo para el formulario de pago a la derecha */
+/* Estilo para el formulario de pago */
 .payment-section {
-  position: absolute;
-  top: 20px;
-  right: -400px; /* Posiciónalo fuera del contenedor principal */
   background-color: #fff;
   padding: 20px;
-  width: 350px;
+  width: 100%; /* Ocupa el 100% del ancho del contenedor */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  margin-top: 20px; /* Añadir espacio entre el contenido y el formulario de pago */
 }
 
 .payment-section h4 {

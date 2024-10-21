@@ -9,12 +9,8 @@ import { useNavigate } from "react-router-dom"; // Para redirigir al usuario
 import "./Booking.css";
 import { useAuth } from "../AuthContext"; // Asegúrate de que la ruta sea la correcta
 
-
 // Cargar la clave pública de Stripe
 const stripePromise = loadStripe("pk_test_51Q7rPlP9VBpcKRyaBmd4WsoCTnitpOzGOfxhD5tmGOMoN0BL9tAhubAvVSNI6qXPOtKkuenRwPp4SjknLP8TwCFI00Vco5GyZW");
-
-
-
 
 export default function Booking() {
   const { cartItems, clearCart } = useCart(); // Obtenemos los elementos del carrito y la función para vaciarlo
@@ -28,7 +24,6 @@ export default function Booking() {
     estadoReservacion: "Pendiente", // Valor por defecto
     total: "", // Se calculará automáticamente
     notas: "",
-    
   });
 
   const [message, setMessage] = useState(""); // Estado para manejar mensajes
@@ -123,8 +118,6 @@ export default function Booking() {
         Cantidad: 1, // Esto depende de cómo manejes la cantidad en tu lógica
         Precio: service.Precio.toFixed(2).replace('.', ','), // Convertir el precio con coma como separador decimal
       }));
-
-      console.log('Enviando los siguientes servicios:', servicios); // Verifica los datos enviados
 
       // Enviar los servicios al backend
       await axios.post("http://localhost:3000/api/servicios_reservaciones", { servicios });
@@ -303,20 +296,20 @@ export default function Booking() {
           <button type="submit" className="btn btn-primary" onClick={handleSubmit} disabled={isFormDisabled}>
             Confirmar Reserva
           </button>
-        </div>
 
-        {/* Mostrar formulario de pago después de confirmar reserva */}
-        {isPaymentVisible && (
-          <div className="payment-section">
-            <Elements stripe={stripePromise}>
-              <CheckoutForm
-                reservationId={reservationId}
-                total={formData.total}
-                onSuccess={handlePaymentSuccess} // Pasa la función onSuccess
-              />
-            </Elements>
-          </div>
-        )}
+          {/* Mostrar formulario de pago después de confirmar reserva */}
+          {isPaymentVisible && (
+            <div className="payment-section">
+              <Elements stripe={stripePromise}>
+                <CheckoutForm
+                  reservationId={reservationId}
+                  total={formData.total}
+                  onSuccess={handlePaymentSuccess} // Pasa la función onSuccess
+                />
+              </Elements>
+            </div>
+          )}
+        </div>
 
         {/* Mostramos el mensaje de éxito o error */}
         {message && <p className="message">{message}</p>}

@@ -6,14 +6,14 @@ import { contact } from "../components/data/Data";
 export default function Contact() {
   return (
     <>
-      <Heading heading="Contact" title="Home" subtitle="Contact" />
+      <Heading heading="Contactanos" title="PETHEAVEN"/>
 
       <div class="container-xxl py-5">
         <div class="container">
           <CommonHeading
-            heading="Contact Us"
-            subtitle="Contact "
-            title="For Any Query"
+            heading="Contactanos"
+            subtitle="Contactanos "
+            title="Para cualquier constulta"
           />
           <div class="row g-4">
             <div class="col-12">
@@ -34,7 +34,7 @@ export default function Contact() {
             <div class="col-md-6 wow fadeIn" data-wow-delay="0.1s">
             <iframe
                 className="position-relative rounded w-100 h-100"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.3703381004566!2d-90.73807448857025!3d14.577961185846922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85890d35a484175d%3A0xb83d910002dc8b94!2sUMG%20Jocotenango%2C%20Antigua!5e0!3m2!1ses!2sgt!4v1729474908283!5m2!1ses!2sgt"
                 frameBorder="0"
                 style={{ minHeight: "350px", border: "0" }}
                 allowFullScreen=""
@@ -55,7 +55,7 @@ export default function Contact() {
                           id="name"
                           placeholder="Your Name"
                         />
-                        <label for="name">Your Name</label>
+                        <label for="name">Tu nombre</label>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -66,7 +66,7 @@ export default function Contact() {
                           id="email"
                           placeholder="Your Email"
                         />
-                        <label for="email">Your Email</label>
+                        <label for="email">Tu correo</label>
                       </div>
                     </div>
                     <div class="col-12">
@@ -77,7 +77,7 @@ export default function Contact() {
                           id="subject"
                           placeholder="Subject"
                         />
-                        <label for="subject">Subject</label>
+                        <label for="subject">Asunto</label>
                       </div>
                     </div>
                     <div class="col-12">
@@ -88,12 +88,12 @@ export default function Contact() {
                           id="message"
                           style={{ height: "150px" }}
                         ></textarea>
-                        <label for="message">Message</label>
+                        <label for="message">Mensaje</label>
                       </div>
                     </div>
                     <div class="col-12">
                       <button class="btn btn-primary w-100 py-3" type="submit">
-                        Send Message
+                        Enviar mensaje
                       </button>
                     </div>
                   </div>

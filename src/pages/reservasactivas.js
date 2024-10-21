@@ -33,7 +33,7 @@ export default function ReservasActivas() {
 
   return (
     <>
-      <Heading heading="Reservas Activas" title="Home" subtitle="Reservas Activas" />
+      <Heading heading="Reservas Activas" title="PETHEAVEN"/>
       <div className="reservas-activas-container">
         <h1>Reservas Activas</h1>
         {error && <p className="error-message">{error}</p>}

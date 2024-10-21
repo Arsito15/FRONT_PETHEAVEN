@@ -17,15 +17,13 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
     try {
       const response = await axios.post("http://localhost:3000/api/login", {
         correo: email,
         password,
       });
-  
+
       if (response.data.token) {
-        console.log("Token recibido: ", response.data.token);
         localStorage.setItem("token", response.data.token);
         setIsAuthenticated(true);
         navigate("/");  
@@ -34,76 +32,74 @@ export default function Login() {
       }
     } catch (error) {
       setErrorMessage("Error al iniciar sesión. Por favor, inténtalo de nuevo.");
-      console.error("Error en login tradicional:", error);
     }
   };
-  
-  const onSuccess = async (credentialResponse) => {
-    console.log("Login exitoso con Google. Credencial recibida:", credentialResponse);
 
+  const onSuccess = async (credentialResponse) => {
     try {
       const decodedToken = jwtDecode(credentialResponse.credential);
-      const { name, picture, email } = decodedToken;
-
-      console.log("Información decodificada del token de Google:", decodedToken);
+      const { picture } = decodedToken;
 
       const res = await axios.post("http://localhost:3000/api/google-login", {
         tokenId: credentialResponse.credential,
       });
 
       if (res.data.token) {
-        console.log("Token recibido de Google: ", res.data.token);
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("avatarUrl", picture);  // Guarda la URL del avatar en localStorage
+        localStorage.setItem("avatarUrl", picture);
         setIsAuthenticated(true);
         navigate("/");  
       } else {
         setErrorMessage("Error en la autenticación con Google.");
       }
     } catch (error) {
-      console.error("Error en autenticación con Google:", error);
       setErrorMessage("Error al autenticar con Google.");
     }
   };
 
   const onFailure = (error) => {
-    console.error("Error en el login con Google:", error);
     setErrorMessage("Error al iniciar sesión con Google. Por favor, inténtalo de nuevo.");
   };
 
   return (
-    <div className="login-container">
-      <h1>Iniciar Sesión</h1>
-      <form onSubmit={handleLogin}>
-        <div className="form-group">
-          <label htmlFor="email">Correo Electrónico:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-form">
+          <h1>Iniciar Sesión</h1>
+          <form onSubmit={handleLogin}>
+            <div className="form-group">
+              <label htmlFor="email">Correo Electrónico:</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Contraseña:</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <div className="buttons-container">
+              <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
+              <GoogleOAuthProvider clientId={clientId}>
+                <GoogleLogin onSuccess={onSuccess} onError={onFailure} />
+              </GoogleOAuthProvider>
+            </div>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Contraseña:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
-        <div className="buttons-container">
-          <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
-
-          <GoogleOAuthProvider clientId={clientId}>
-            <GoogleLogin onSuccess={onSuccess} onError={onFailure} />
-          </GoogleOAuthProvider>
-        </div>
-      </form>
+      </div>
+      <div className="login-logo">
+        <img src="/assets/img/petlogo.png" alt="Logo" />
+      </div>
     </div>
   );
 }

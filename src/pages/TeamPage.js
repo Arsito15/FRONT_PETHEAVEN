@@ -5,7 +5,7 @@ import Teams from "../components/home/Team";
 export default function Team() {
   return (
     <>
-      <Heading heading="Team" title="Home" subtitle="Team" />
+      <Heading heading="Nuestro equipo" title="PETHEAVEN" />
       <Teams />
     </>
   );

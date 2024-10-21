@@ -31,17 +31,34 @@ export default function Carousel() {
 
   return (
     <>
-      <div className="container-fluid p-0 mb-5">
+      <div className="container-fluid" style={{ padding: 0, margin: 0, overflow: "hidden" }}>
         <div
           id="header-carousel"
           className="carousel slide"
           data-bs-ride="carousel"
+          style={{ margin: 0, padding: 0, width: "100vw", overflow: "hidden" }} // Ajustamos el ancho del carrusel a todo el viewport
         >
-          <div className="carousel-inner">
+          <div className="carousel-inner" style={{ margin: 0, padding: 0 }}>
             <Slider ref={sliderRef} {...settings}>
               {carouselData.map((val, index) => (
-                <div className="carousel-item" key={index}>
-                  <img className="w-100" src={val.img} alt="Image" />
+                <div
+                  className="carousel-item"
+                  key={index}
+                  style={{ margin: 0, padding: 0 }} // Eliminamos margen y padding
+                >
+                  <img
+                    className="w-100"
+                    src={val.img}
+                    alt="Image"
+                    style={{
+                      margin: 0,
+                      padding: 0,
+                      objectFit: "cover", // Asegura que la imagen cubra el contenedor sin deformarse
+                      width: "100vw", // Ajustamos el ancho al 100% del viewport
+                      height: "100vh", // Ocupar toda la altura del viewport
+                      display: "block",
+                    }}
+                  />
                   <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                     <div className="p-3" style={{ maxWidth: "700px" }}>
                       <h6 className="section-title text-white text-uppercase mb-3 animated slideInDown">

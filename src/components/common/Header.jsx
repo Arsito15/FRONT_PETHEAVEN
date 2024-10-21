@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { navList } from "../data/Data";
-import SocialIcons from "./SocialIcons";
 import { useAuth } from "../../AuthContext";  // Importa el contexto de autenticación
+
 
 export default function Header() {
   const [navbarCollapse, setNavbarCollapse] = useState(false);
@@ -40,12 +40,24 @@ export default function Header() {
               to="/"
               className="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center"
             >
+              {/* Aquí ajustamos el tamaño del logo */}
+              <img
+                src="/assets/img/petlogo.png"
+                alt="Petheaven Logo"
+                style={{ width: "85px", height: "80px", marginRight: "5px" }}  // Ajusta el tamaño del logo aquí
+              />
               <h1 className="m-0 text-primary text-uppercase">PETHEAVEN</h1>
             </Link>
           </div>
           <div className="col-lg-9">
             <nav className="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
-              <Link to="/" className="navbar-brand d-block d-lg-none">
+              <Link to="/" className="navbar-brand d-block d-lg-none d-flex align-items-center">
+                  {/* Aquí ajustamos el tamaño del logo para pantallas pequeñas */}
+                  <img
+                    src="/assets/img/petlogo.png"
+                    alt="Petheaven Logo"
+                    style={{ width: "60px", height: "60px", marginRight: "10px" }}  // Ajusta el tamaño del logo aquí para pantallas pequeñas
+                  />
                 <h1 className="m-0 text-primary text-uppercase">Petheaven</h1>
               </Link>
               <button
@@ -131,8 +143,6 @@ export default function Header() {
                     </button>
                   </div>
                 </div>
-
-                <SocialIcons />
               </div>
             </nav>
           </div>
