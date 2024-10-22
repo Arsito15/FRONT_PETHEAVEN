@@ -1,0 +1,206 @@
+/* Estilos generales */
+.report-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.layout {
+    display: flex;
+    margin-top: 20px;
+}
+
+/* Barra lateral */
+.sidebar {
+    background-color: #0F172B;
+    color: white;
+    width: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra en la barra lateral */
+}
+
+.sidebar h3 {
+    font-size: 24px;
+    color: white;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #233a73;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.sidebar ul li.active {
+    background-color: #ec268c;
+}
+
+.sidebar ul li:hover {
+    background-color: #444;
+}
+
+/* Área de contenido */
+.content {
+    flex: 1;
+    margin-left: 20px;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Gráfica y recuadro de resumen */
+.graph-section {
+    margin-top: 20px;
+}
+
+.graph-and-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Alinear recuadros y gráfica hacia el inicio */
+    margin-top: 20px;
+}
+
+.graph-container {
+    width: 60%; /* Ajuste del tamaño de la gráfica */
+    padding: 20px;
+}
+
+.summary-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre los recuadros */
+    width: 35%; /* Ajuste para que los recuadros tengan más espacio y se alineen */
+}
+
+.summary-box {
+    width: 100%; /* Se ajusta al 100% del espacio asignado en la sección */
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.summary-box h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.summary-box p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Añadido para asegurar que haya una separación adecuada en dispositivos pequeños */
+@media (max-width: 768px) {
+    .graph-and-summary {
+        flex-direction: column;
+    }
+    
+    .summary-section {
+        width: 100%; /* Tomará todo el ancho disponible */
+    }
+    
+    .graph-container {
+        width: 100%; /* La gráfica tomará todo el ancho disponible */
+    }
+}
+
+
+.active-reservations-box {
+    width: 25%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-left: 10px;
+}
+
+.active-reservations-box h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.active-reservations-box p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Placeholder para la gráfica */
+.graph-placeholder {
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    color: #333;
+}
+
+/* Tabla */
+.table-container {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #233a73;
+    color: white;
+}
+
+td {
+    background-color: #fff;
+}
+
+/* Paginación */
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px;
+    background-color: #233a73;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px; /* Tamaño más grande para las flechas */
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-weight: bold;
+}
