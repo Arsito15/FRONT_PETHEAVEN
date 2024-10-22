@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { navList } from "../data/Data";
 import { useAuth } from "../../AuthContext";  // Importa el contexto de autenticación
-
 
 export default function Header() {
   const [navbarCollapse, setNavbarCollapse] = useState(false);
@@ -52,12 +50,12 @@ export default function Header() {
           <div className="col-lg-9">
             <nav className="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
               <Link to="/" className="navbar-brand d-block d-lg-none d-flex align-items-center">
-                  {/* Aquí ajustamos el tamaño del logo para pantallas pequeñas */}
-                  <img
-                    src="/assets/img/petlogo.png"
-                    alt="Petheaven Logo"
-                    style={{ width: "60px", height: "60px", marginRight: "10px" }}  // Ajusta el tamaño del logo aquí para pantallas pequeñas
-                  />
+                {/* Aquí ajustamos el tamaño del logo para pantallas pequeñas */}
+                <img
+                  src="/assets/img/petlogo.png"
+                  alt="Petheaven Logo"
+                  style={{ width: "60px", height: "60px", marginRight: "10px" }}  // Ajusta el tamaño del logo aquí para pantallas pequeñas
+                />
                 <h1 className="m-0 text-primary text-uppercase">Petheaven</h1>
               </Link>
               <button
@@ -75,36 +73,43 @@ export default function Header() {
                 }
               >
                 <div className="navbar-nav mr-auto py-0">
-                  {navList.map((item, index) => (
-                    <div key={index}>
-                      {item.subItems ? (
+                  {/* Condición para mostrar diferentes opciones según el rol */}
+                  {userData?.rol === 'admin' ? (
+                    <>
+                      {/* Opciones para administradores */}
+                      <Link to="/admin/graficas" className="nav-item nav-link">Dashboard Admin</Link>
+                      <Link to="/admin/usuarios" className="nav-item nav-link">G Usuarios</Link>
+                      <Link to="/admin/servicios" className="nav-item nav-link">G Servicios</Link>
+                      <Link to="/admin/habitaciones" className="nav-item nav-link">G Habitaciones</Link>
+                      <Link to="/admin/productos" className="nav-item nav-link">G Productos</Link>
+                    </>
+                  ) : (
+                    <>
+                      {/* Opciones para usuarios normales */}
+                      <Link to="/" className="nav-item nav-link">Inicio</Link>
+                      <Link to="/about" className="nav-item nav-link">Acerca de</Link>
+                      <Link to="/services" className="nav-item nav-link">Servicios</Link>
+                      <Link to="/rooms" className="nav-item nav-link">Habitaciones</Link>
+                      <div
+                        className="nav-item dropdown"
+                        onMouseEnter={() => handleMouseEnter(5)}
+                        onMouseLeave={handleMouseLeave}
+                      >
+                        <Link className="nav-link dropdown-toggle">Páginas</Link>
                         <div
-                          className="nav-item dropdown"
-                          onMouseEnter={() => handleMouseEnter(item.id)}
-                          onMouseLeave={handleMouseLeave}
+                          className={`dropdown-menu rounded-0 m-0 ${
+                            activeDropdown === 5 ? "show" : ""
+                          }`}
                         >
-                          <Link className="nav-link dropdown-toggle">
-                            {item.text}
-                          </Link>
-                          <div
-                            className={`dropdown-menu rounded-0 m-0 ${
-                              activeDropdown === item.id ? "show" : ""
-                            }`}
-                          >
-                            {item.subItems.map((sub) => (
-                              <Link to={sub.path} className="dropdown-item" key={sub.id}>
-                                {sub.text}
-                              </Link>
-                            ))}
-                          </div>
+                          <Link to="/booking" className="dropdown-item">Agendar</Link>
+                          <Link to="/ReservasActivas" className="dropdown-item">Reservas Activas</Link>
+                          <Link to="/team" className="dropdown-item">Nuestro Equipo</Link>
+                          <Link to="/testimonial" className="dropdown-item">Testimonios</Link>
                         </div>
-                      ) : (
-                        <Link to={item.path} className="nav-item nav-link">
-                          {item.text}
-                        </Link>
-                      )}
-                    </div>
-                  ))}
+                      </div>
+                      <Link to="/contact" className="nav-item nav-link">Contáctanos</Link>
+                    </>
+                  )}
                 </div>
 
                 {/* Sección de usuario */}

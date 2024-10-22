@@ -25,6 +25,12 @@ import {
   ReservasActivas,
   UserForm,
   MascotaForm,
+  G_productos,
+  G_servicio,
+  G_usuario,
+  Graficas,
+  G_habitacion,
+
 } from "./pages/index";
 import RoomDetails from "./components/RoomDetails";  // Detalles de habitación
 import Login from "./login";  // Componente Login
@@ -59,6 +65,11 @@ export default function App() {
                         <Route path="/room/:id" element={<RoomDetails />} />
                         <Route path="/UserForm" element={<UserForm />} />
                         <Route path="/MascotaForm" element={<MascotaForm />} />
+                        <Route path="/admin/habitaciones" element={<G_habitacion />} />
+                        <Route path="/admin/productos" element={<G_productos />} />
+                        <Route path="/admin/servicios" element={<G_servicio />} />
+                        <Route path="/admin/usuarios" element={<G_usuario />} />
+                        <Route path="/admin/graficas" element={<Graficas />} />
 
                         {/* Rutas públicas (si las necesitas) */}
                         <Route path="/about" element={<AboutUs />} />

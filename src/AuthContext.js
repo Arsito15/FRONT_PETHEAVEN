@@ -13,10 +13,12 @@
     const obtenerDatosUsuario = useCallback(async (token) => {
       try {
         const response = await axios.get("http://localhost:3000/api/me", {
-          headers: { "x-access-token": token },  // Enviando el token en el header
+          headers: { "x-access-token": token },
         });
-        console.log("Datos del usuario recibidos de la API:", response.data); // Verificar si 'telefono' está presente
-        setUserData(response.data);  // Guardar los datos del usuario en el contexto
+        setUserData({
+          ...response.data,
+          rol: response.data.ROL,  // Usamos ROL que viene en mayúsculas desde la API
+        });
       } catch (error) {
         console.error("Error al obtener los datos del usuario:", error);
         localStorage.removeItem("token");
@@ -25,6 +27,7 @@
         navigate("/login");
       }
     }, [navigate]);
+    
     
 
     useEffect(() => {

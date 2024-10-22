@@ -13,6 +13,13 @@ import MascotaForm from "../pages/MascotaForm";
 import { CartProvider, useCart } from "../pages/CartContext"; // Importamos el contexto del carrito correctamente
 import Cart from "../pages/Cart";  
 
+// Importamos las nuevas páginas para el administrador
+import G_habitacion from "../pages/G_habitacion";
+import G_productos from "../pages/G_productos";
+import G_servicio from "../pages/G_servicio";
+import G_usuario from "../pages/G_usuario";
+import Graficas from "../pages/graficas";
+
 export {
   Home,
   Booking,
@@ -29,4 +36,10 @@ export {
   CartProvider,
   useCart,
   Cart,
+  // Exportamos las páginas de administración
+  G_habitacion,
+  G_productos,
+  G_servicio,
+  G_usuario,
+  Graficas,
 };

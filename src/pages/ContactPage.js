@@ -1,104 +1,112 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAuth } from "../AuthContext";
 import Heading from "../components/common/Heading";
 import CommonHeading from "../components/common/CommonHeading";
-import { contact } from "../components/data/Data";
+import axios from "axios";
 
 export default function Contact() {
+  const { userData } = useAuth(); // Obtén los datos del usuario desde AuthContext
+  const [formData, setFormData] = useState({
+    name: "",
+    email: userData ? userData.email : "", // Usa el correo del usuario autenticado
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3000/send-email", formData);
+      console.log("Correo enviado: ", response.data);
+      alert("Correo enviado con éxito");
+    } catch (error) {
+      console.error("Error enviando el correo: ", error);
+      alert("Hubo un error enviando el correo");
+    }
+  };
+
   return (
     <>
-      <Heading heading="Contactanos" title="PETHEAVEN"/>
+      <Heading heading="Contactanos" title="PETHEAVEN" />
 
-      <div class="container-xxl py-5">
-        <div class="container">
+      <div className="container-xxl py-5">
+        <div className="container">
           <CommonHeading
             heading="Contactanos"
-            subtitle="Contactanos "
-            title="Para cualquier constulta"
+            subtitle="Contactanos"
+            title="Para cualquier consulta"
           />
-          <div class="row g-4">
-            <div class="col-12">
-              <div class="row gy-4">
-                {contact.map((item, index) => (
-                  <div class="col-md-4">
-                    <h6 class="section-title text-start text-primary text-uppercase">
-                      {item.title}
-                    </h6>
-                    <p>
-                      {item.icon}
-                      {item.email}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div class="col-md-6 wow fadeIn" data-wow-delay="0.1s">
-            <iframe
-                className="position-relative rounded w-100 h-100"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.3703381004566!2d-90.73807448857025!3d14.577961185846922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85890d35a484175d%3A0xb83d910002dc8b94!2sUMG%20Jocotenango%2C%20Antigua!5e0!3m2!1ses!2sgt!4v1729474908283!5m2!1ses!2sgt"
-                frameBorder="0"
-                style={{ minHeight: "350px", border: "0" }}
-                allowFullScreen=""
-                aria-hidden="false"
-                tabIndex="0"
-                title="Mapa de ubicación de Nueva York"  // Título agregado
-              ></iframe>
-            </div>
-            <div class="col-md-6">
-              <div class="wow fadeInUp" data-wow-delay="0.2s">
-                <form>
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="name"
-                          placeholder="Your Name"
-                        />
-                        <label for="name">Tu nombre</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="email"
-                          placeholder="Your Email"
-                        />
-                        <label for="email">Tu correo</label>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="subject"
-                          placeholder="Subject"
-                        />
-                        <label for="subject">Asunto</label>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <div class="form-floating">
-                        <textarea
-                          class="form-control"
-                          placeholder="Leave a message here"
-                          id="message"
-                          style={{ height: "150px" }}
-                        ></textarea>
-                        <label for="message">Mensaje</label>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100 py-3" type="submit">
-                        Enviar mensaje
-                      </button>
+          <div className="row g-4">
+            <div className="col-md-6">
+              <form onSubmit={handleSubmit}>
+                <div className="row g-3">
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Tu nombre"
+                      />
+                      <label htmlFor="name">Tu nombre</label>
                     </div>
                   </div>
-                </form>
-              </div>
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Tu correo"
+                        readOnly
+                      />
+                      <label htmlFor="email">Tu correo</label>
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        placeholder="Asunto"
+                      />
+                      <label htmlFor="subject">Asunto</label>
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <div className="form-floating">
+                      <textarea
+                        className="form-control"
+                        placeholder="Deja tu mensaje"
+                        id="message"
+                        style={{ height: "150px" }}
+                        value={formData.message}
+                        onChange={handleChange}
+                      ></textarea>
+                      <label htmlFor="message">Mensaje</label>
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <button className="btn btn-primary w-100 py-3" type="submit">
+                      Enviar mensaje
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div className="col-md-6">
+              {/* Mapa y otros elementos */}
             </div>
           </div>
         </div>
