@@ -1,0 +1,224 @@
+/* Contenedor principal del formulario */
+.admin-user-form__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #f0f4f8;
+}
+
+/* Contenedor del formulario */
+.admin-user-form__form-wrapper {
+  width: 45%;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de los grupos de formulario */
+.admin-user-form__form-group {
+  margin-bottom: 15px;
+}
+
+/* Etiquetas del formulario */
+.admin-user-form__label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Campos de entrada del formulario */
+.admin-user-form__input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}
+
+/* Botón del formulario */
+.admin-user-form__btn {
+  width: 100%;
+  background-color: #ff9900;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+/* Efecto hover para el botón */
+.admin-user-form__btn:hover {
+  background-color: #cc7a00;
+}
+
+/* Mensajes de éxito y error */
+.admin-user-form__success-message,
+.admin-user-form__error-message {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.admin-user-form__success-message {
+  color: green;
+}
+
+.admin-user-form__error-message {
+  color: red;
+}
+
+/* Contenedor de usuarios */
+.users__container {
+  width: 45%;
+}
+
+/* Lista de usuarios */
+.users__list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Tarjeta de usuario */
+.user__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  gap: 15px;
+}
+
+/* Estilo del avatar del usuario */
+.user__avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+/* Detalles del usuario */
+.user__details {
+  flex-grow: 1;
+}
+
+.user__details h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.user__details p {
+  margin: 3px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Acciones en la tarjeta de usuario */
+.user__card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.user__card-actions .btn {
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+/* Botón de editar usuario */
+.user__card-actions .btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.user__card-actions .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Botón de eliminar usuario */
+.user__card-actions .btn-danger {
+  background-color: #ff4c4c;
+  color: white;
+}
+
+.user__card-actions .btn-danger:hover {
+  background-color: #cc0000;
+}
+
+/* Contenedor de la barra de búsqueda */
+/* Barra de búsqueda */
+.search__container {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.search__input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor del avatar en el formulario */
+.admin-user-form__avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.admin-user-form__avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.admin-user-form__avatar-overlay {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: white;
+}
+
+.admin-user-form__avatar-container:hover .admin-user-form__avatar-overlay {
+  opacity: 1;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .admin-user-form__container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .admin-user-form__form-wrapper,
+  .users__list {
+    width: 100%;
+  }
+}
