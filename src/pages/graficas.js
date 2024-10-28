@@ -307,7 +307,7 @@ const Graficas = () => {
                   {/* Monto Total de Pagos */}
                   <div className="summary-box">
                     <h4>Monto Total de Pagos</h4>
-                    <p>${totalPagos}</p>
+                    <p>Q{totalPagos}</p>
                   </div>
 
                   {/* Número Total de Pagos */}
