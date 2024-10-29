@@ -18,6 +18,7 @@
     "express": "^4.21.1",
     "gapi-script": "^1.2.0",
     "google-auth-library": "^9.14.2",
+    "html2canvas": "^1.4.1",
     "jsonwebtoken": "^9.0.2",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.4",

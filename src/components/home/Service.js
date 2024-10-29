@@ -136,7 +136,7 @@ export default function Services() {
                         <p className="text-body mb-0">
                           {service.Descripcion || "Descripción no disponible"}
                         </p>
-                        <p className="service-price">Precio: ${service.Precio}</p>
+                        <p className="service-price">Precio: Q{service.Precio}</p>
                         <p className="service-duration">
                           Duración: {service.Duracion} minutos
                         </p>

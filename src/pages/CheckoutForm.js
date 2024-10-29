@@ -1,64 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
-import "./CheckoutForm.css"; // Importamos el CSS
+import "./CheckoutForm.css";
 
 export default function CheckoutForm({ reservationId, total, onSuccess }) {
   const stripe = useStripe();
   const elements = useElements();
-  const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false); // Para manejar el estado de éxito del pago
-  const [isPaymentProcessing, setIsPaymentProcessing] = useState(false); // Estado para evitar pagos múltiples
+  const [clientSecret, setClientSecret] = useState(""); // Almacenar el clientSecret de Stripe
+  const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
+  const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
+
+  useEffect(() => {
+    // Crear una intención de pago en el backend y obtener el clientSecret
+    const createPaymentIntent = async () => {
+      const formattedTotal = parseFloat(total.replace(',', '.'));
+      const response = await axios.post("http://localhost:3000/api/crear-intencion", {
+        amount: formattedTotal,
+      });
+      setClientSecret(response.data.clientSecret); // Guardar el clientSecret para confirmar el pago
+    };
+
+    createPaymentIntent();
+  }, [total]);
 
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
 
-    if (!stripe || !elements) {
-      return; // Stripe.js aún no se ha cargado
+    if (!stripe || !elements || !clientSecret) {
+      return;
     }
 
-    // Deshabilitar el botón mientras se procesa el pago
     setIsPaymentProcessing(true);
 
     const cardElement = elements.getElement(CardElement);
 
     try {
-      // Crea el pago en Stripe
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: "card",
-        card: cardElement,
+      // Confirmar el pago con el clientSecret obtenido del backend
+      const { error } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardElement,
+        },
       });
 
       if (!error) {
-        // Convertimos el total a un número decimal
-        const formattedTotal = parseFloat(total.replace(',', '.'));
-
-        // Enviar los datos de pago al backend para crear el pago
         await axios.post("http://localhost:3000/api/pagos", {
-          Reservacion_ID: reservationId, // Usamos el ID de la reservación
-          Monto_Total: formattedTotal.toFixed(2), // El total del pago formateado a dos decimales
+          Reservacion_ID: reservationId,
+          Monto_Total: parseFloat(total.replace(',', '.')).toFixed(2),
           Metodo_Pago: "card",
           Estado_Pago: "completado",
         });
 
-        // Marcar el pago como exitoso
         setIsPaymentSuccessful(true);
-
-        // Llamar al callback de éxito
         onSuccess();
 
-        // Mostrar la notificación de éxito
         setTimeout(() => {
-          setIsPaymentSuccessful(false); // Ocultar la notificación después de unos segundos
-        }, 5000); // Ocultar después de 5 segundos
+          setIsPaymentSuccessful(false);
+        }, 5000);
       } else {
         console.error(error);
         alert("Error al procesar el pago.");
-        setIsPaymentProcessing(false); // Volver a habilitar el botón si hay un error
       }
     } catch (error) {
       console.error("Error al realizar el pago:", error);
       alert("Ocurrió un error al procesar el pago.");
-      setIsPaymentProcessing(false); // Volver a habilitar el botón si hay un error
+    } finally {
+      setIsPaymentProcessing(false);
     }
   };
 
@@ -68,14 +74,13 @@ export default function CheckoutForm({ reservationId, total, onSuccess }) {
         <CardElement className="card-element" />
         <button
           type="submit"
-          disabled={!stripe || isPaymentProcessing || isPaymentSuccessful} // Deshabilitar si el pago está en proceso o ya fue exitoso
+          disabled={!stripe || isPaymentProcessing || isPaymentSuccessful}
           className="btn-pay"
         >
           Pagar {total} €
         </button>
       </form>
 
-      {/* Notificación de pago exitoso */}
       {isPaymentSuccessful && (
         <div className="success-notification">
           <img
