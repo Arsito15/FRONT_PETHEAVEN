@@ -8,16 +8,14 @@
     width: 100%;
 }
 
-/* Barra de búsqueda */
-.search__container {
+/* Search bar container */
+.search__service-container {
     width: 100%;
     max-width: 600px;
-    position: absolute; /* Adjusted for better alignment */
-    top: 10px;
-    left: 10px;
+    margin-bottom: 1.5rem; /* Position adjusted */
 }
 
-.search__input {
+.search__service-input {
     width: 100%;
     padding: 0.75rem;
     border-radius: 5px;
@@ -35,7 +33,6 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-right: 2rem;
-    margin-bottom: 2rem; /* Ajustado para evitar demasiado espacio inferior */
 }
 
 /* Title of the form */
@@ -49,7 +46,7 @@
 
 /* Form group for each input */
 .admin-service-form__form-group {
-    margin-bottom: 1rem; /* Reducido para compactar */
+    margin-bottom: 1rem;
 }
 
 /* Labels for the inputs */
@@ -113,7 +110,7 @@
 .services__container {
     width: 100%;
     max-width: 800px;
-    margin-top: 1rem; /* Ajustado para que aparezca más cerca */
+    margin-top: 1rem;
 }
 
 /* Sección de grupo de servicios por tipo */
@@ -133,7 +130,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
-    justify-content: flex-start; /* Align to left */
+    justify-content: flex-start;
 }
 
 /* Individual service card */
@@ -147,7 +144,7 @@
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    max-width: 200px; /* Ajuste para que las tarjetas sean más compactas */
+    max-width: 200px;
 }
 
 .service__details {

@@ -84,12 +84,12 @@ export default function Header() {
                       <Link to="/admin/servicios" className="nav-item nav-link">
                         G Servicios
                       </Link>
-                      <Link to="/admin/habitaciones" className="nav-item nav-link">
+                      {/* <Link to="/admin/habitaciones" className="nav-item nav-link">
                         G Habitaciones
                       </Link>
                       <Link to="/admin/productos" className="nav-item nav-link">
                         G Productos
-                      </Link>
+                      </Link> */}
                     </>
                   ) : (
                     <>

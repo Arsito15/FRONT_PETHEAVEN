@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import "./G_usuario.css";  // Archivo CSS para los estilos
+import "./G_usuario.css";  // Archivo CSS para los estilos específicos
 
 export default function AdminUserForm() {
   const [userFormData, setUserFormData] = useState({
@@ -18,7 +18,7 @@ export default function AdminUserForm() {
   const [selectedUserId, setSelectedUserId] = useState(null);  // Usuario seleccionado para editar
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");  // Estado para almacenar el texto de búsqueda
+  const [searchUserQuery, setSearchUserQuery] = useState("");  // Estado para almacenar el texto de búsqueda
   const fileInputRef = useRef(null);  // Referencia al input para subir imágenes
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function AdminUserForm() {
   };
 
   const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);  // Actualiza el texto de búsqueda
+    setSearchUserQuery(e.target.value);  // Actualiza el texto de búsqueda
   };
 
   // Manejo del archivo seleccionado
@@ -61,21 +61,23 @@ export default function AdminUserForm() {
     e.preventDefault();
 
     try {
+      const formData = new FormData();
+      formData.append("nombreUsuario", userFormData.nombreUsuario);
+      formData.append("email", userFormData.email);
+      formData.append("telefono", userFormData.telefono);
+      formData.append("rol", userFormData.rol);
+      formData.append("avatarUrl", userFormData.avatarUrl);
+      
+      if (!editing) {
+        formData.append("contraseña", userFormData.contraseña);
+      }
+      
+      if (selectedFile) {
+        formData.append("file", selectedFile);
+      }
+
       if (editing && selectedUserId) {
-        // Editar el usuario existente
-        const formData = new FormData();
         formData.append("usuarioId", selectedUserId);
-        formData.append("nombreUsuario", userFormData.nombreUsuario);
-        formData.append("email", userFormData.email);
-        formData.append("telefono", userFormData.telefono);
-        formData.append("rol", userFormData.rol);
-        formData.append("avatarUrl", userFormData.avatarUrl);
-
-        // Solo agregar el archivo si se seleccionó uno
-        if (selectedFile) {
-          formData.append("file", selectedFile);
-        }
-
         await axios.put("http://localhost:3000/api/usuarios/update", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -83,20 +85,6 @@ export default function AdminUserForm() {
         });
         setSuccessMessage("Usuario editado correctamente.");
       } else {
-        // Crear nuevo usuario
-        const formData = new FormData();
-        formData.append("nombreUsuario", userFormData.nombreUsuario);
-        formData.append("email", userFormData.email);
-        formData.append("telefono", userFormData.telefono);
-        formData.append("rol", userFormData.rol);
-        formData.append("avatarUrl", userFormData.avatarUrl);
-        formData.append("contraseña", userFormData.contraseña);
-
-        // Solo agregar el archivo si se seleccionó uno
-        if (selectedFile) {
-          formData.append("file", selectedFile);
-        }
-
         await axios.post("http://localhost:3000/api/usuarios", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -140,8 +128,8 @@ export default function AdminUserForm() {
   // Filtrar usuarios según el texto de búsqueda
   const filteredUsers = users.filter((user) => {
     return (
-      user.NOMBRE_USUARIO.toLowerCase().includes(searchQuery.toLowerCase()) ||  // Buscar por nombre de usuario
-      user.TELEFONO?.toString().includes(searchQuery)  // Buscar por teléfono (convertido a string por si es numérico)
+      user.NOMBRE_USUARIO.toLowerCase().includes(searchUserQuery.toLowerCase()) ||  // Buscar por nombre de usuario
+      user.TELEFONO?.toString().includes(searchUserQuery)  // Buscar por teléfono (convertido a string por si es numérico)
     );
   });
 
@@ -237,13 +225,13 @@ export default function AdminUserForm() {
       {/* Sección para mostrar los usuarios registrados */}
       <div className="users__container">
         {/* Barra de búsqueda arriba del listado */}
-        <div className="search__container">
+        <div className="search__user-container">
           <input
             type="text"
             placeholder="Buscar por nombre o teléfono"
-            value={searchQuery}
+            value={searchUserQuery}
             onChange={handleSearchChange}
-            className="search__input"
+            className="search__user-input"
           />
         </div>
 

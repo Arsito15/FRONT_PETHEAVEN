@@ -159,14 +159,13 @@
   background-color: #cc0000;
 }
 
-/* Contenedor de la barra de búsqueda */
-/* Barra de búsqueda */
-.search__container {
+/* Contenedor y barra de búsqueda específica para usuarios */
+.search__user-container {
   width: 100%;
   margin-bottom: 15px;
 }
 
-.search__input {
+.search__user-input {
   width: 100%;
   padding: 10px;
   font-size: 16px;

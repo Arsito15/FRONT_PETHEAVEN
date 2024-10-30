@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./G_servicio.css"; // Archivo CSS específico para los estilos
+import "./G_servicio.css";
 
 export default function AdminServiceForm() {
   const [serviceFormData, setServiceFormData] = useState({
@@ -12,14 +12,13 @@ export default function AdminServiceForm() {
   });
 
   const [services, setServices] = useState([]);
-  const [editing, setEditing] = useState(false); // Estado para controlar si se está editando
-  const [selectedServiceId, setSelectedServiceId] = useState(null); // Servicio seleccionado para editar
+  const [editing, setEditing] = useState(false);
+  const [selectedServiceId, setSelectedServiceId] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [searchQuery, setSearchQuery] = useState(""); // Estado para almacenar el texto de búsqueda
+  const [searchServiceQuery, setSearchServiceQuery] = useState("");
 
   useEffect(() => {
-    // Obtener todos los servicios registrados
     axios
       .get("http://localhost:3000/api/servicios")
       .then((response) => {
@@ -47,39 +46,28 @@ export default function AdminServiceForm() {
   };
 
   const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value); // Actualiza el texto de búsqueda
+    setSearchServiceQuery(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      if (editing && selectedServiceId) {
-        // Editar el servicio existente
-        const updatedService = {
-          nombreServicio: serviceFormData.nombreServicio,
-          descripcion: serviceFormData.descripcion,
-          precio: parseFloat(serviceFormData.precio),
-          duracion: parseFloat(serviceFormData.duracion),
-          tipo: serviceFormData.tipo
-        };
+      const serviceData = {
+        nombreServicio: serviceFormData.nombreServicio,
+        descripcion: serviceFormData.descripcion,
+        precio: parseFloat(serviceFormData.precio),
+        duracion: parseFloat(serviceFormData.duracion),
+        tipo: serviceFormData.tipo
+      };
 
-        await axios.put(`http://localhost:3000/api/servicios/${selectedServiceId}`, updatedService);
+      if (editing && selectedServiceId) {
+        await axios.put(`http://localhost:3000/api/servicios/${selectedServiceId}`, serviceData);
         setSuccessMessage("Servicio editado correctamente.");
       } else {
-        // Crear nuevo servicio
-        const newService = {
-          nombreServicio: serviceFormData.nombreServicio,
-          descripcion: serviceFormData.descripcion,
-          precio: parseFloat(serviceFormData.precio),
-          duracion: parseFloat(serviceFormData.duracion),
-          tipo: serviceFormData.tipo
-        };
-
-        await axios.post("http://localhost:3000/api/servicios", newService);
+        await axios.post("http://localhost:3000/api/servicios", serviceData);
         setSuccessMessage("Servicio registrado correctamente.");
       }
-      window.location.reload(); // Recargar la página para mostrar los cambios
+      window.location.reload();
     } catch (error) {
       setErrorMessage("Error al procesar la solicitud. Intenta nuevamente.");
       console.error("Error al procesar la solicitud:", error);
@@ -94,7 +82,7 @@ export default function AdminServiceForm() {
       duracion: service.Duracion,
       tipo: service.Tipo
     });
-    setSelectedServiceId(service.Servicio_ID); // Guardar el ID del servicio
+    setSelectedServiceId(service.Servicio_ID);
     setEditing(true);
   };
 
@@ -109,7 +97,6 @@ export default function AdminServiceForm() {
     }
   };
 
-  // Función para asignar el icono basado en el tipo de servicio
   const getIconUrl = (tipo) => {
     switch (tipo) {
       case "Alimentos":
@@ -129,39 +116,26 @@ export default function AdminServiceForm() {
 
   // Agrupar servicios por tipo
   const groupServicesByType = () => {
-    const grouped = services.reduce((acc, service) => {
+    return services.reduce((acc, service) => {
       if (!acc[service.Tipo]) {
         acc[service.Tipo] = [];
       }
       acc[service.Tipo].push(service);
       return acc;
     }, {});
-    return grouped;
   };
 
   const groupedServices = groupServicesByType();
 
   const filteredServices = services.filter((service) => {
     return (
-      service.Nombre_Servicio.toLowerCase().includes(searchQuery.toLowerCase()) || // Buscar por nombre de servicio
-      service.Tipo.toLowerCase().includes(searchQuery.toLowerCase()) // Buscar por tipo de servicio
+      service.Nombre_Servicio.toLowerCase().includes(searchServiceQuery.toLowerCase()) ||
+      service.Tipo.toLowerCase().includes(searchServiceQuery.toLowerCase())
     );
   });
 
   return (
     <div className="admin-service-form__container">
-      {/* Barra de búsqueda */}
-      <div className="search__container">
-        <input
-          type="text"
-          placeholder="Buscar por nombre o tipo de servicio"
-          value={searchQuery}
-          onChange={handleSearchChange}
-          className="search__input"
-        />
-      </div>
-
-      {/* Formulario para crear o editar servicios */}
       <div className="admin-service-form__form-wrapper">
         <h2 className="admin-service-form__title">{editing ? `Editar Servicio` : "Registrar Nuevo Servicio"}</h2>
         <form onSubmit={handleSubmit} className="admin-service-form__form">
@@ -243,39 +217,42 @@ export default function AdminServiceForm() {
         </form>
       </div>
 
-      {/* Sección para mostrar los servicios registrados */}
       <div className="services__container">
+        <div className="search__service-container">
+          <input
+            type="text"
+            placeholder="Buscar por nombre o tipo de servicio"
+            value={searchServiceQuery}
+            onChange={handleSearchChange}
+            className="search__service-input"
+          />
+        </div>
+
         {Object.keys(groupedServices).map((tipo, index) => (
           <div key={index} className="service-group">
-            <h3 className="text-center my-4">{tipo}</h3>
-            <div className="row g-4">
-              {groupedServices[tipo].map((service, idx) => (
-                <div className="col-lg-4 col-md-6" key={idx}>
-                  <div className="service__card">
-                    <div className="service-icon">
-                      <img
-                        src={getIconUrl(service.Tipo)}
-                        alt={service.Nombre_Servicio}
-                        className="service-icon-img"
-                      />
-                    </div>
-                    <h5 className="mb-3">{service.Nombre_Servicio}</h5>
-                    <p>{service.Descripcion}</p>
-                    <p><strong>Precio:</strong> ${service.Precio.toFixed(2)}</p>
-                    <p><strong>Duración:</strong> {service.Duracion} horas</p>
-                    <div className="service__card-actions">
-                      <button className="btn btn-primary" onClick={() => handleEditService(service)}>Editar</button>
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => {
-                          if (window.confirm(`¿Estás seguro de que deseas eliminar el servicio ${service.Nombre_Servicio}?`)) {
-                            handleDeleteService(service.Servicio_ID);
-                          }
-                        }}
-                      >
-                        Eliminar
-                      </button>
-                    </div>
+            <h3 className="service-group__title">{tipo}</h3>
+            <div className="services__list">
+              {groupedServices[tipo].map((service) => (
+                <div className="service__card" key={service.Servicio_ID}>
+                  <div className="service-icon">
+                    <img src={getIconUrl(service.Tipo)} alt={service.Nombre_Servicio} className="service-icon-img" />
+                  </div>
+                  <h5>{service.Nombre_Servicio}</h5>
+                  <p>{service.Descripcion}</p>
+                  <p><strong>Precio:</strong> ${service.Precio.toFixed(2)}</p>
+                  <p><strong>Duración:</strong> {service.Duracion} horas</p>
+                  <div className="service__card-actions">
+                    <button className="btn btn-primary" onClick={() => handleEditService(service)}>Editar</button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => {
+                        if (window.confirm(`¿Estás seguro de que deseas eliminar el servicio ${service.Nombre_Servicio}?`)) {
+                          handleDeleteService(service.Servicio_ID);
+                        }
+                      }}
+                    >
+                      Eliminar
+                    </button>
                   </div>
                 </div>
               ))}
